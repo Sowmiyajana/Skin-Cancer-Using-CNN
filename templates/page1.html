@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20201101/pngtree-scene-with-geometrical-forms-the-poster-model-minimal-background-render-image_452981.jpg');
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333; /* Improved text color for readability */
+        }
+        .wrapper {
+            width: 400px; /* Increased width for better spacing */
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9); /* Slight transparency for the background */
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px); /* Blur effect for background */
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007bff; /* Color for the header */
+        }
+        .input-box {
+            margin-bottom: 20px;
+        }
+        .input-box input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: border-color 0.3s; /* Transition for border color */
+        }
+        .input-box input:focus {
+            border-color: #007bff; /* Border color on focus */
+            outline: none; /* Remove default outline */
+        }
+        .btn {
+            background-color: #007bff; /* Bootstrap primary color */
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 16px; /* Increased font size for button */
+            transition: background-color 0.3s; /* Transition for hover effect */
+        }
+        .btn:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+        .flashes {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 15px; /* Spacing for flash messages */
+        }
+        .flashes .danger {
+            color: red;
+        }
+        .flashes .success {
+            color: green; /* Color for success messages */
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <h2>Sign-Up</h2>
+    <form method="POST" action="{{ url_for('register') }}">
+        <div class="input-box">
+            <input type="text" id="username" placeholder="Username" name="username" required>
+        </div>
+        <div class="input-box">
+            <input type="password" id="password" placeholder="Password" name="password" required>
+        </div>
+        <div class="input-box">
+            <input type="password" id="confirm_password" placeholder="Confirm Password" name="confirm_password" required>
+        </div>
+        <div class="input-box">
+            <input type="email" id="email" placeholder="Email" name="email" required>
+        </div>
+        <button type="submit" class="btn">Sign up</button>
+    </form>
+
+    <!-- Flash messages display -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</div>
+
+</body>
+</html>

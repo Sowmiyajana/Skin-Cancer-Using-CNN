@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://as1.ftcdn.net/v2/jpg/09/56/01/06/1000_F_956010645_x7sNg9K8KukbawHBK0FEhjtn3KzI9ypd.jpg'); /* Background image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .wrapper {
+            width: 350px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .form-box {
+            text-align: center;
+        }
+
+        .login-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .input-box {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff; /* White background for input */
+            color: black; /* Black text for input */
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .remember-forgot label {
+            font-size: 14px;
+        }
+
+        .remember-forgot a {
+            font-size: 14px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .btn {
+            background-color: #28a745; /* Bootstrap success color */
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Transition for hover effect */
+        }
+
+        .btn:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+        .login-register {
+            margin-top: 20px;
+        }
+
+        .login-register a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        /* Flash messages styling */
+        .flashes {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .flashes li {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .flashes .success {
+            background-color: rgba(220, 233, 223, 0.8);
+            color: #155724;
+        }
+
+        .flashes .danger {
+            background-color: rgba(248, 215, 218, 0.8);
+            color: #721c24;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <div class="form-box login">
+            <h2 class="login-title">Login</h2>
+            
+            <!-- Form submission to Flask login route -->
+            <form method="POST" action="{{ url_for('login') }}">
+                <div class="input-box">
+                    <input type="text" id="username" placeholder="Username" name="username" required>
+                </div>
+                <div class="input-box">
+                    <input type="password" id="password" placeholder="Password" name="password" required>
+                </div>
+                <div class="remember-forgot">
+                    <label><input type="checkbox">Remember me</label>
+                    <a href="{{ url_for('forgot_password') }}">Forgot Password?</a> <!-- Link to password reset -->
+                </div>
+                <button type="submit" class="btn">Login</button>
+                <div class="login-register">
+                    <p>Don't have an account? <a href="{{ url_for('register') }}">Register</a></p>
+                </div>
+            </form>
+
+            <!-- Flash messages display -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <ul class="flashes">
+                        {% for category, message in messages %}
+                            <li class="{{ category }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js" type="module"></script>
+    <script src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js" nomodule></script>
+
+</body>
+</html>
